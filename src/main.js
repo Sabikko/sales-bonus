@@ -56,6 +56,8 @@ function analyzeSalesData(data, options) {
 
     // @TODO: Проверка наличия опций
 
+    const { calculateRevenue, calculateBonus } = options;
+
     if (!(typeof options.calculateRevenue === "function") || !(typeof options.calculateBonus === "function")) {
         throw new Error('Чего-то не хватает');
     } 
@@ -95,7 +97,7 @@ function analyzeSalesData(data, options) {
             if (!product) return;
             const cost = product.purchase_price * item.quantity;
 
-            const revenue = calculateSimpleRevenue(item, product);
+            const revenue = calculateRevenue(item, product);
 
             seller.revenue += revenue;
             seller.profit += revenue - cost; 
@@ -114,7 +116,7 @@ function analyzeSalesData(data, options) {
     // @TODO: Назначение премий на основе ранжирования
 
     sellerStats.forEach((seller, index) => {
-        seller.bonus = calculateBonusByProfit(index, seller.length, seller); // Считаем бонус
+        seller.bonus = calculateBonus(index, seller.length, seller); // Считаем бонус
         seller.top_products = Object.entries(seller.products_sold)
             .sort((sku1, sku2) => sku2[1] - sku1[1])
             .slice(0, 10)
