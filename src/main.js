@@ -50,6 +50,9 @@ function analyzeSalesData(data, options) {
     || !Array.isArray(data.product)
     || !Array.isArray(data.purchase_records)
     || !(typeof options === "object")
+    || data.sellers.length === 0 
+    || data.products.length === 0
+    || data.purchase_records.length === 0
     ) {
         throw new Error('Некорректные входные данные');
     }    
@@ -57,10 +60,6 @@ function analyzeSalesData(data, options) {
     // @TODO: Проверка наличия опций
 
     const { calculateRevenue, calculateBonus } = options;
-
-    if (!(typeof calculateRevenue === "function") || !(typeof calculateBonus === "function")) {
-        throw new Error('Чего-то не хватает');
-    } 
 
     // @TODO: Подготовка промежуточных данных для сбора статистики
 
