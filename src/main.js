@@ -47,7 +47,8 @@ function analyzeSalesData(data, options) {
 
     if (!data
     || !Array.isArray(data.sellers)
-    || data.sellers.length === 0
+    || !Array.isArray(data.product)
+    || !Array.isArray(data.purchase_records)
     || !(typeof options === "object")
     ) {
         throw new Error('Некорректные входные данные');
