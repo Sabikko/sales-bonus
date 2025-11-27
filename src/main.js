@@ -58,7 +58,7 @@ function analyzeSalesData(data, options) {
 
     const { calculateRevenue, calculateBonus } = options;
 
-    if (!(typeof options.calculateRevenue === "function") || !(typeof options.calculateBonus === "function")) {
+    if (!(typeof calculateRevenue === "function") || !(typeof calculateBonus === "function")) {
         throw new Error('Чего-то не хватает');
     } 
 
